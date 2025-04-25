@@ -9,10 +9,14 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                echo 'Compilation ou construction du projet ici...'
-            }
+      steps {
+        dir('mini-node-app') {
+          sh 'npm install'
+          sh 'npm test'
         }
+      }
+    }
+
 
         stage('Test') {
             steps {
