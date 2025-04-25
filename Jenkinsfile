@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Définir des variables d'environnement si nécessaire
-//        NODE_HOME = "/usr/local/bin/node"  // Remplace selon ta configuration
+        NODE_HOME = "/usr/bin/node"  // Remplace selon ta configuration
     }
 
     stages {
