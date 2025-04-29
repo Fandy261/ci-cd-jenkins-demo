@@ -4,7 +4,6 @@ pipeline {
     environment {
         NODE_HOME = "/usr/bin/node"
     }
-
     stages {
         stage('Checkout') {
             steps {
@@ -16,21 +15,24 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                dir('mini-node-app') {
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                dir('mini-node-app') {
+                    sh 'npm test'
+                }
             }
         }
 
         stage('Build') {
             steps {
                 dir('mini-node-app') {
-                    sh 'npm install'
-                    sh 'npm test'
+                    sh 'npm run build' // ou autre commande si besoin
                 }
             }
         }
