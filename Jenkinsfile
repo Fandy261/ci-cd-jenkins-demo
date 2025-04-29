@@ -29,6 +29,12 @@ pipeline {
             }
         }
 
+        stage('Test Docker Access') {
+    steps {
+        sh 'docker version'
+          }
+    }
+
         stage('Build Docker Image') {
             steps {
                 dir('docker') {
