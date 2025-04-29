@@ -8,41 +8,31 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-creds-id', url: 'https://github.com/fandy261/ci-cd-jenkins-demo.git'
+                git credentialsId: 'github-token-fandy',
+                    url: 'https://github.com/fandy261/ci-cd-jenkins-demo.git',
+                    branch: 'main'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                dir('mini-node-app') {
-                    sh 'npm install'
-                }
+                sh 'npm install'
             }
         }
 
         stage('Test') {
             steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Build') {
+            steps {
                 dir('mini-node-app') {
+                    sh 'npm install'
                     sh 'npm test'
-                }
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                dir('mini-node-app') {
-                    sh 'docker build -t mini-node-app .'
-                }
-            }
-        }
-
-        stage('Run Container') {
-            steps {
-                dir('mini-node-app') {
-                    sh 'docker run -d -p 3000:3000 --env-file .env mini-node-app'
                 }
             }
         }
     }
 }
-
