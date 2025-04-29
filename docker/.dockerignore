@@ -1,0 +1,8 @@
+../mini-node-app/node_modules
+../mini-node-app/npm-debug.log
+Dockerfile
+.dockerignore
+../.git
+../.gitignore
+../.env
+

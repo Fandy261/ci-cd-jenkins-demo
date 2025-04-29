@@ -1,57 +1,45 @@
 pipeline {
-    agent any  // Utilise l'agent par défaut de Jenkins
+    agent any
 
     environment {
-        // Définir des variables d'environnement si nécessaire
-        NODE_HOME = "/usr/bin/node"  // Remplace selon ta configuration
+        NODE_HOME = "/usr/bin/node"
     }
 
     stages {
-        // Étape de checkout du code depuis le dépôt Git
         stage('Checkout') {
             steps {
-                git 'https://github.com/fandy261/ci-cd-jenkins-demo.git'  // Remplace avec l'URL de ton projet GitHub
+                git 'https://github.com/fandy261/ci-cd-jenkins-demo.git'
             }
         }
 
-        // Étape d'installation des dépendances Node.js
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Installation des dépendances avec npm
-                    sh 'npm install'  // S'assure que toutes les dépendances sont installées
+                dir('mini-node-app') {
+                    sh 'npm install'
                 }
             }
         }
 
-        // Étape de tests (si tu en as)
         stage('Test') {
             steps {
-                script {
-                    // Exécution des tests avec npm
-                    sh 'npm test'  // Si tu as un script "test" dans ton package.json
+                dir('mini-node-app') {
+                    sh 'npm test'
                 }
             }
         }
 
-        // Étape de build (si nécessaire)
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                script {
-                    // Construire le projet si nécessaire (par exemple, minification, compilation)
-                    sh 'npm run build'  // Remplace avec ton propre script build, si tu en as
+                dir('mini-node-app') {
+                    sh 'docker build -t mini-node-app .'
                 }
             }
         }
 
-        // Étape de déploiement
-        stage('Deploy') {
+        stage('Run Container') {
             steps {
-                script {
-                    // Si tu veux déployer ton projet, configure ici ta logique de déploiement
-                    echo 'Déploiement de l’application...'
-                    // Exemple d'une commande de déploiement (remplacer par ce que tu utilises)
-                    // sh 'npm run deploy'  // Si tu as un script "deploy" dans ton package.json
+                dir('mini-node-app') {
+                    sh 'docker run -d -p 3000:3000 --env-file .env mini-node-app'
                 }
             }
         }
