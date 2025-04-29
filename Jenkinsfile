@@ -1,8 +1,8 @@
 pipeline {
-     agent {
-        docker {
-            image 'node:18' // Utilise l'image officielle Node.js
-        }
+     agent any
+
+    environment {
+        DOCKER_IMAGE = 'node:18'
     }
     stages {
         stage('Checkout') {
@@ -13,18 +13,12 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install Dependencies & Test') {
             steps {
                 dir('mini-node-app') {
-                    sh 'npm install'
-                }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                dir('mini-node-app') {
-                    sh 'npm test'
+                    sh """
+                    docker run --rm -v \$PWD:/app -w /app node:18 sh -c 'npm install && npm test'
+                    """
                 }
             }
         }
