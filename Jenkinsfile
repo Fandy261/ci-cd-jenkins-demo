@@ -17,7 +17,7 @@ pipeline {
             steps {
                 dir('mini-node-app') {
                     sh """
-                    docker run --rm -v \$PWD:/app -w /app node:18 sh -c 'npm install && npm test'
+                    docker run --rm -v \$PWD:/miini-node-app -w /mini-node-app node:18 sh -c 'npm install && npm test'
                     """
                 }
             }
