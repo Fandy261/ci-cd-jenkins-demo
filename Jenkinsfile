@@ -1,8 +1,8 @@
 pipeline {
-    agent any
-
-    environment {
-        NODE_HOME = "/usr/bin/node"
+     agent {
+        docker {
+            image 'node:18' // Utilise l'image officielle Node.js
+        }
     }
     stages {
         stage('Checkout') {
