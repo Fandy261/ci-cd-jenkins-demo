@@ -8,7 +8,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/fandy261/ci-cd-jenkins-demo.git'
+
+ 
+                git credentialsId: 'github-token-fandy',
+ 
+                    url: 'https://github.com/fandy261/ci-cd-jenkins-demo.git',
+ 
+                    branch: 'main'
+ 
             }
         }
 
