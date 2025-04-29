@@ -31,7 +31,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                dir('mini-node-app') {
+                dir('docker') {
                     sh 'docker build -t mini-node-app .'
                 }
             }
@@ -39,7 +39,7 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                dir('mini-node-app') {
+                dir('docker') {
                     sh 'docker run -d -p 3000:3000 --env-file .env mini-node-app'
                 }
             }
