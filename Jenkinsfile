@@ -1,37 +1,35 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18'
+        }
+    }
 
     environment {
-        DOCKER_IMAGE = 'node:18'
+        APP_DIR = 'mini-node-app'
     }
 
     stages {
         stage('Checkout') {
             steps {
-
- 
                 git credentialsId: 'github-token-fandy',
- 
                     url: 'https://github.com/fandy261/ci-cd-jenkins-demo.git',
- 
                     branch: 'main'
- 
             }
         }
 
         stage('Install Dependencies & Test') {
             steps {
-                dir('mini-node-app') {
-                    sh """
-                    docker run --rm -v \$PWD:/app -w /app node:18 sh -c 'npm install && npm test'
-                    """
+                dir("${APP_DIR}") {
+                    sh 'npm install'
+                    sh 'npm test'
                 }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                dir('mini-node-app') {
+                dir("${APP_DIR}") {
                     sh 'docker build -t mini-node-app .'
                 }
             }
