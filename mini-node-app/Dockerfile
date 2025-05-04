@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 #copie du fichier .env pour l'utiliser en local mais en temps normal, il ne faut pas copier .env
-COPY ../.env .env
+COPY .env .env
 
 # Installation des dépendances
 RUN npm install
