@@ -29,8 +29,10 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
+		dir("${APP_DIR}/../docker") {
                     sh 'docker build -t mini-node-app .'
-            }
+            	}
+	    }
         }
     }
 }
