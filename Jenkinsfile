@@ -30,7 +30,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
 		dir("${APP_DIR}") {
-                    sh 'docker build -t mini-node-app .'
+                    	sh 'ls -l'
+			sh 'docker build -t mini-node-app .'
             	}
 	    }
         }
