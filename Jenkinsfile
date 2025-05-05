@@ -1,9 +1,7 @@
 pipeline {
     agent {
-        docker {
-            image 'node:18'
-        }
-    }
+    label 'contrôleur'
+     }
 
     environment {
         APP_DIR = 'mini-node-app'
@@ -29,7 +27,7 @@ pipeline {
 	stage('debug'){
 	    steps {
   sh 'whoami'
-  sh 'which docker'
+  sh 'which docker || echo "docker not found"'
   sh 'docker version'
 }
 
