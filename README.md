@@ -19,6 +19,7 @@ Le pipeline est défini dans un fichier `Jenkinsfile` en syntaxe déclarative.
 - Structurer un pipeline Jenkins en plusieurs étapes
 - Déclencher des actions sur chaque commit
 - Utiliser des agents génériques
+- Dockeriser une app dans un container jenkins
 
 ### Les complications que j'ai rencontré
 
