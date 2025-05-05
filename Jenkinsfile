@@ -26,7 +26,14 @@ pipeline {
                 }
             }
         }
+	stage('debug'){
+	    steps {
+  sh 'whoami'
+  sh 'which docker'
+  sh 'docker version'
+}
 
+	}
         stage('Build Docker Image') {
             steps {
 		dir("${APP_DIR}") {
