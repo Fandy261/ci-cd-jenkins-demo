@@ -20,8 +20,8 @@ Le pipeline est défini dans un fichier `Jenkinsfile` en syntaxe déclarative.
 - Déclencher des actions sur chaque commit
 - Utiliser des agents génériques
 
-### Prochaines étapes
+### Les complications que j'ai rencontré
 
-- Ajouter des tests automatisés réels
-- Intégrer Docker
-- Faire une version avec Jenkinsfiles multibranches
+- Intégrer Docker dans un container jenkins mais en utilisant une image de jenkins et en ajoutant l'installation de docker cli et le démarrer
+avec -v /var/run/docker.sock:/var/run/docker.sock parce que cela donnes au container Jenkins accès au Docker du host. 
+- Installer les dépendances hors jenkins, j'ai laissé docker installé les dépendances de mon app.
