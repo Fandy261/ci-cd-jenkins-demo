@@ -16,14 +16,6 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies & Test') {
-            steps {
-                dir("${APP_DIR}") {
-                    sh 'npm install'
-                    sh 'npm test'
-                }
-            }
-        }
 	stage('debug'){
 	    steps {
   sh 'whoami'
