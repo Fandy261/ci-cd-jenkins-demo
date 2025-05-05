@@ -1,6 +1,6 @@
 pipeline {
     agent {
-    label 'contrôleur'
+    label 'master'
      }
 
     environment {
